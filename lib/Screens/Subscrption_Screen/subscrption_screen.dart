@@ -43,7 +43,7 @@ class _SubscriptionPlanScreenState extends State<SubscriptionPlanScreen> {
                 text: const TextSpan(
                   children: <TextSpan>[
                     TextSpan(
-                      text: 'Unlock Smart Living\n with the ',
+                      text: 'Unlock Smart Living\nwith the ',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 24,
@@ -99,9 +99,6 @@ class _SubscriptionPlanScreenState extends State<SubscriptionPlanScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 10),
                         decoration: BoxDecoration(
-                          // color: _selectedDurationIndex == index
-                          //     ? Colors.blue
-                          //     : AppColors.buttonBackground,
                           gradient: _selectedDurationIndex == index
                               ? LinearGradient(
                                   colors: [
@@ -209,7 +206,7 @@ class SubscriptionTypePage extends StatelessWidget {
               final plan = plans[index];
               return PlanCard(
                 type: plan.type,
-                price: '${plan.price.toStringAsFixed(2)} INR',
+                price: plan.price.toStringAsFixed(2),
                 slogan: plan.title.toString(),
                 descrption1: plan.descrption1.toString(),
                 descrption2: plan.descrption2.toString(),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gemesh/Constants/color_constant.dart';
 import 'package:gemesh/Constants/image_constant.dart';
+import 'package:gemesh/Screens/Subscrption_Screen/subscrption_payment_screen.dart';
 import 'package:gemesh/Widgets/Styles/custom_text_style.dart';
 
 class PlanCard extends StatefulWidget {
@@ -28,8 +29,11 @@ class PlanCard extends StatefulWidget {
 class _PlanCardState extends State<PlanCard> {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: AppColors.buttonBackground,
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.buttonBackground,
+        borderRadius: BorderRadius.circular(30),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -58,7 +62,7 @@ class _PlanCardState extends State<PlanCard> {
 
             //price
             Text(
-              widget.price,
+              '₹ ${widget.price}',
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 30,
@@ -76,15 +80,16 @@ class _PlanCardState extends State<PlanCard> {
               children: [
                 //desc
                 Text(
-                  '• ${widget.descrption1}',
+                  '✔ ${widget.descrption1}',
                   style: const TextStyle(
                     color: AppColors.primary,
                     fontSize: 15,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  '• ${widget.descrption2}',
+                  '✔ ${widget.descrption2}',
                   style: const TextStyle(
                     color: AppColors.primary,
                     fontSize: 15,
@@ -93,7 +98,7 @@ class _PlanCardState extends State<PlanCard> {
                 const SizedBox(height: 10),
                 //validity
                 Text(
-                  '• ${widget.validity}',
+                  '✔ ${widget.validity}',
                   style: const TextStyle(
                     color: AppColors.primary,
                     fontSize: 15,
@@ -132,7 +137,16 @@ class _PlanCardState extends State<PlanCard> {
                   'Buy Now',
                   style: TextStyle(fontSize: 18),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SubscrptionPaymentScreen(
+                          planName: widget.type,
+                          planPrice: widget.price,
+                        ),
+                      ));
+                },
               ),
             ),
           ],
