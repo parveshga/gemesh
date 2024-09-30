@@ -6,6 +6,8 @@ import 'package:gemesh/Constants/image_constant.dart';
 import 'package:gemesh/Screens/Auth_Screens/OTP_Screen/number_auth_screen.dart';
 import 'package:gemesh/Screens/Auth_Screens/Register_Screen/register_screen.dart';
 import 'package:gemesh/Screens/Auth_Screens/login_screen.dart';
+import 'package:gemesh/Services/google_auth_service.dart';
+import 'package:provider/provider.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -44,6 +46,8 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final googleSignInService = Provider.of<GoogleSignInService>(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
@@ -51,8 +55,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
         decoration: BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
           Colors.blue.shade900,
-          Colors.blue.shade800,
-          Colors.blue.shade400
+          Colors.blue.shade400,
         ])),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -308,31 +311,38 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
                               )),
                           FadeInUp(
                               duration: const Duration(milliseconds: 1600),
-                              child: Container(
-                                height: 50,
-                                width: 150,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
-                                        color: Colors.blue.shade800)),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 15.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SvgPicture.asset(ImageConstant.imgGoogle),
-                                      const SizedBox(
-                                        width: 15,
-                                      ),
-                                      const Text(
-                                        "Google",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
+                              child: GestureDetector(
+                                onTap: () async {
+                                  await googleSignInService.signInWithGoogle();
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                          color: Colors.blue.shade800)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(
+                                            ImageConstant.imgGoogle),
+                                        const SizedBox(
+                                          width: 15,
+                                        ),
+                                        const Text(
+                                          "Google",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               )),
