@@ -54,6 +54,9 @@ class ImageConstant {
 
   static String imgJoinNowBeAPart = '$imagePath/onboarding3.svg';
 
+  //subscrption
+  static String imgSubscrption = '$imagePath/subscrption.png';
+
   // Profile images
   static String imgEllipse584 = '$imagePath/Ellipse 584.jpg';
 

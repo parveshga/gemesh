@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gemesh/Constants/image_constant.dart';
 import 'package:gemesh/Screens/Auth_Screens/Register_Screen/register_screen.dart';
+import 'package:gemesh/Screens/Subscrption_Screen/subscrption_screen.dart';
 import 'package:gemesh/Widgets/Styles/custom_text_style.dart';
 import 'package:gemesh/Widgets/custom_text_form_field.dart';
 
@@ -39,7 +40,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: FadeInUp(
                   duration: const Duration(milliseconds: 1500),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const SubscriptionPlanScreen(),
+                          ));
+                    },
                     child: Container(
                       height: 40,
                       width: 100,
