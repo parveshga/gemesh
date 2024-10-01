@@ -26,11 +26,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => GoogleSignInService(),
-      child: MaterialApp(
-        title: 'Google Sign-In Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: true,
         home: SplashScreen(),
       ),
     );

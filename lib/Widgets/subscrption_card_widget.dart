@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gemesh/Constants/color_constant.dart';
 import 'package:gemesh/Constants/image_constant.dart';
-import 'package:gemesh/Screens/Subscrption_Screen/subscrption_payment_screen.dart';
+import 'package:gemesh/Screens/Main_Screens/bottom_navigation.dart';
 import 'package:gemesh/Widgets/Styles/custom_text_style.dart';
 
 class PlanCard extends StatefulWidget {
@@ -125,8 +125,7 @@ class _PlanCardState extends State<PlanCard> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
-                  backgroundColor:
-                      Colors.transparent, // Set background to transparent
+                  backgroundColor: Colors.transparent,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -141,11 +140,16 @@ class _PlanCardState extends State<PlanCard> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SubscrptionPaymentScreen(
-                          planName: widget.type,
-                          planPrice: widget.price,
-                        ),
+                        builder: (context) => const CustomBottomNavigation(),
                       ));
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => SubscrptionPaymentScreen(
+                  //         planName: widget.type,
+                  //         planPrice: widget.price,
+                  //       ),
+                  //     ));
                 },
               ),
             ),

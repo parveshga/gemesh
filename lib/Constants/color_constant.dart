@@ -8,6 +8,9 @@ class AppColors {
   static const Color background = Color(0xFFECF0F1);
   static const Color text = Color(0xFF2C3E50);
 
+  //background color
+  static const Color whiteBackground = Color(0xFFFFFFFF);
+
   //
   static const Color buttonBackground = Color(0xFFD6F0FF);
 }
