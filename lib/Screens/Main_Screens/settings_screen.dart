@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gemesh/Constants/color_constant.dart';
 import 'package:gemesh/Constants/image_constant.dart';
+import 'package:gemesh/Screens/Component_Screens/device_configuration_screen.dart';
+import 'package:gemesh/Screens/Component_Screens/manage_rooms_screen.dart';
+import 'package:gemesh/Screens/Component_Screens/profile_screen.dart';
+import 'package:gemesh/Screens/Component_Screens/user_management.dart';
 import 'package:gemesh/Widgets/Styles/app_decoration.dart';
 import 'package:gemesh/Widgets/Styles/custom_text_style.dart';
 import 'package:gemesh/Widgets/Styles/theme_helper.dart';
@@ -23,12 +27,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
         surfaceTintColor: AppColors.whiteBackground,
         backgroundColor: AppColors.whiteBackground,
         automaticallyImplyLeading: false,
-        title: const Text(
-          'Settings',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 25,
-            fontWeight: FontWeight.w500,
+        title: const Center(
+          child: Text(
+            'Settings',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 25,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
       ),
@@ -62,7 +68,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Container(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 18),
         decoration: AppDecoration.outlineBlack.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder8,
+            borderRadius: BorderRadiusStyle.roundedBorder34,
             border: Border.all(
               color: AppColors.backgroundColor,
             )),
@@ -74,11 +80,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   padding: const EdgeInsets.only(left: 4),
                   child: GestureDetector(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const ProfileScreen()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ProfileScreen()),
+                      );
                     },
                     child: _buildContactUsIcon(
                       context,
@@ -91,11 +97,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   padding: const EdgeInsets.only(left: 4),
                   child: GestureDetector(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const UserScreen()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const UserManagementScreen()),
+                      );
                     },
                     child: _buildContactUsIcon(
                       context,
@@ -115,8 +121,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           child: SvgPicture.asset(
                             ImageConstant
                                 .imgThemeIcon1, // Replace ImageConstant.imgThemeIcon1 with your SVG file path
-                            height: 26,
-                            width: 26,
+                            height: 24,
+                            width: 24,
                           ),
                         ),
                         Padding(
@@ -138,11 +144,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   padding: const EdgeInsets.only(left: 4),
                   child: GestureDetector(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const ManageRoomScreen()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ManageRoomsScreen()),
+                      );
                     },
                     child: _buildContactUsIcon(
                       context,
@@ -158,7 +164,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Container(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 18),
         decoration: AppDecoration.outlineBlack.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder8,
+            borderRadius: BorderRadiusStyle.roundedBorder34,
             border: Border.all(
               color: AppColors.backgroundColor,
             )),
@@ -181,33 +187,41 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           SvgPicture.asset(ImageConstant.imgHagwayIcon,
-                              height: 26, width: 26),
+                              height: 24, width: 24),
                           Padding(
                               padding: const EdgeInsets.only(left: 16),
                               child: Text("Hagway",
                                   style: CustomTextStyles.labelLargeGray900_1)),
                           const Spacer(),
                           SvgPicture.asset(ImageConstant.imgArrowRight,
-                              height: 26, width: 26)
+                              height: 24, width: 24)
                         ]),
                   )),
               const SizedBox(height: 16),
               Padding(
                   padding: const EdgeInsets.only(right: 3),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const DeviceConfigurationScreen()),
+                      );
+                    },
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           SvgPicture.asset(ImageConstant.imgDeviceConfigaration,
-                              height: 26, width: 26),
+                              height: 24, width: 24),
                           Padding(
-                              padding: const EdgeInsets.only(left: 16),
-                              child: Text("Device Configure",
-                                  style: CustomTextStyles.labelLargeGray900_1)),
+                            padding: const EdgeInsets.only(left: 16),
+                            child: Text("Device Configure",
+                                style: CustomTextStyles.labelLargeGray900_1),
+                          ),
                           const Spacer(),
                           SvgPicture.asset(ImageConstant.imgArrowRight,
-                              height: 26, width: 26)
+                              height: 24, width: 24)
                         ]),
                   )),
               const SizedBox(height: 18),
@@ -246,7 +260,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Container(
         padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 19),
         decoration: AppDecoration.outlineBlack.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder8,
+            borderRadius: BorderRadiusStyle.roundedBorder34,
             border: Border.all(
               color: AppColors.backgroundColor,
             )),
@@ -275,7 +289,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         decoration: AppDecoration.outlineBlack.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder8,
+            borderRadius: BorderRadiusStyle.roundedBorder34,
             border: Border.all(
               color: AppColors.backgroundColor,
             )),
@@ -284,8 +298,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               margin: const EdgeInsets.symmetric(vertical: 2),
               child: SvgPicture.asset(
                 ImageConstant.imgLogOut,
-                height: 26,
-                width: 26,
+                height: 24,
+                width: 24,
               )),
           Padding(
               padding: const EdgeInsets.only(left: 20, top: 4),
@@ -301,7 +315,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     required String users,
   }) {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-      SvgPicture.asset(contactUsIcon, height: 26, width: 26),
+      SvgPicture.asset(contactUsIcon, height: 24, width: 24),
       Padding(
           padding: const EdgeInsets.only(left: 17),
           child: Text(users,
@@ -310,8 +324,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       const Spacer(),
       SvgPicture.asset(
         ImageConstant.imgArrowRight,
-        height: 26,
-        width: 26,
+        height: 24,
+        width: 24,
       )
     ]);
   }
@@ -323,14 +337,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
     required String networksText,
   }) {
     return Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-      SvgPicture.asset(globeImage, height: 26, width: 26),
+      SvgPicture.asset(globeImage, height: 24, width: 24),
       Padding(
           padding: const EdgeInsets.only(left: 17),
           child: Text(networksText,
               style: CustomTextStyles.labelLargeGray900_1
                   .copyWith(color: appTheme.gray900))),
       const Spacer(),
-      SvgPicture.asset(ImageConstant.imgArrowRight, height: 26, width: 26)
+      SvgPicture.asset(ImageConstant.imgArrowRight, height: 24, width: 24)
     ]);
   }
 
@@ -342,7 +356,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     Function? onTapArrowRight,
   }) {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-      SvgPicture.asset(inboxImage, height: 26, width: 26),
+      SvgPicture.asset(inboxImage, height: 24, width: 24),
       Padding(
           padding: const EdgeInsets.only(left: 20),
           child: Text(aboutUs,
@@ -351,7 +365,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       const Spacer(),
       GestureDetector(
           child: SvgPicture.asset(ImageConstant.imgArrowRight,
-              height: 26, width: 26),
+              height: 24, width: 24),
           onTap: () {
             onTapArrowRight!.call();
           })
