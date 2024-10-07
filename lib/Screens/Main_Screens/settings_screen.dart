@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gemesh/Constants/color_constant.dart';
 import 'package:gemesh/Constants/image_constant.dart';
+import 'package:gemesh/Screens/Component_Screens/about_us_screen.dart';
+import 'package:gemesh/Screens/Component_Screens/contact_us_screen.dart';
 import 'package:gemesh/Screens/Component_Screens/device_configuration_screen.dart';
 import 'package:gemesh/Screens/Component_Screens/manage_rooms_screen.dart';
 import 'package:gemesh/Screens/Component_Screens/profile_screen.dart';
 import 'package:gemesh/Screens/Component_Screens/user_management.dart';
+import 'package:gemesh/Screens/Component_Screens/wifi_devices_screen.dart';
 import 'package:gemesh/Widgets/Styles/app_decoration.dart';
 import 'package:gemesh/Widgets/Styles/custom_text_style.dart';
 import 'package:gemesh/Widgets/Styles/theme_helper.dart';
@@ -229,10 +232,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   padding: const EdgeInsets.only(left: 1, right: 3),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        '/ip_devices',
-                      );
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const WifiDevicesScreen()));
                     },
                     child: _buildGlobe(
                       context,
@@ -266,21 +269,51 @@ class _SettingsScreenState extends State<SettingsScreen> {
             )),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           Padding(
-              padding: const EdgeInsets.only(left: 3),
+              padding: const EdgeInsets.only(right: 3),
               child: GestureDetector(
-                onTap: () {},
-                child: _buildInbox(context,
-                    inboxImage: ImageConstant.imgContrast,
-                    aboutUs: "Contact Us"),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ContactUsScreen()),
+                  );
+                },
+                child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                  SvgPicture.asset(ImageConstant.imgContrast,
+                      height: 24, width: 24),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: Text("Contact Us",
+                        style: CustomTextStyles.labelLargeGray900_1),
+                  ),
+                  const Spacer(),
+                  SvgPicture.asset(ImageConstant.imgArrowRight,
+                      height: 24, width: 24)
+                ]),
               )),
           const SizedBox(height: 19),
           Padding(
-              padding: const EdgeInsets.only(left: 3),
+              padding: const EdgeInsets.only(right: 3),
               child: GestureDetector(
-                onTap: () {},
-                child: _buildInbox(context,
-                    inboxImage: ImageConstant.imgInbox, aboutUs: "About Us"),
-              ))
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AboutUsScreen()),
+                  );
+                },
+                child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                  SvgPicture.asset(ImageConstant.imgInbox,
+                      height: 24, width: 24),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: Text("About Us",
+                        style: CustomTextStyles.labelLargeGray900_1),
+                  ),
+                  const Spacer(),
+                  SvgPicture.asset(ImageConstant.imgArrowRight,
+                      height: 24, width: 24)
+                ]),
+              )),
         ]));
   }
 
@@ -345,30 +378,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   .copyWith(color: appTheme.gray900))),
       const Spacer(),
       SvgPicture.asset(ImageConstant.imgArrowRight, height: 24, width: 24)
-    ]);
-  }
-
-  /// Common widget
-  Widget _buildInbox(
-    BuildContext context, {
-    required String inboxImage,
-    required String aboutUs,
-    Function? onTapArrowRight,
-  }) {
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-      SvgPicture.asset(inboxImage, height: 24, width: 24),
-      Padding(
-          padding: const EdgeInsets.only(left: 20),
-          child: Text(aboutUs,
-              style: CustomTextStyles.labelLargeGray900_1
-                  .copyWith(color: appTheme.gray900))),
-      const Spacer(),
-      GestureDetector(
-          child: SvgPicture.asset(ImageConstant.imgArrowRight,
-              height: 24, width: 24),
-          onTap: () {
-            onTapArrowRight!.call();
-          })
     ]);
   }
 }
