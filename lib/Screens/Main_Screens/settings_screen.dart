@@ -6,6 +6,7 @@ import 'package:gemesh/Screens/Component_Screens/about_us_screen.dart';
 import 'package:gemesh/Screens/Component_Screens/contact_us_screen.dart';
 import 'package:gemesh/Screens/Component_Screens/device_configuration_screen.dart';
 import 'package:gemesh/Screens/Component_Screens/manage_rooms_screen.dart';
+import 'package:gemesh/Screens/Component_Screens/network_screen.dart';
 import 'package:gemesh/Screens/Component_Screens/profile_screen.dart';
 import 'package:gemesh/Screens/Component_Screens/user_management.dart';
 import 'package:gemesh/Screens/Component_Screens/wifi_devices_screen.dart';
@@ -246,9 +247,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(height: 17),
               Padding(
                   padding: const EdgeInsets.only(left: 1, right: 3),
-                  child: _buildGlobe(context,
-                      globeImage: ImageConstant.imgGlobe,
-                      networksText: "Networks")),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const NetworkScreen()));
+                    },
+                    child: _buildGlobe(context,
+                        globeImage: ImageConstant.imgGlobe,
+                        networksText: "Networks"),
+                  )),
               const SizedBox(height: 19),
               Padding(
                   padding: const EdgeInsets.only(left: 1, right: 3),
