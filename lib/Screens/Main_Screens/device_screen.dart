@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gemesh/Constants/color_constant.dart';
 import 'package:gemesh/Screens/Component_Screens/fan_control_screen.dart';
 import 'package:gemesh/Screens/Component_Screens/rgb_light_screen.dart';
+import 'package:gemesh/Screens/Component_Screens/speaker_screen.dart';
 import 'package:gemesh/Widgets/room_category_screen.dart';
 
 class DeviceScreen extends StatelessWidget {
@@ -200,7 +201,12 @@ class DeviceScreen extends StatelessWidget {
                         status: 'Active',
                         deviceName: 'SRT4',
                         isOn: true,
-                        onTap: () {}),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SpeakerScreen()));
+                        }),
                   ],
                 ),
               ),

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gemesh/Constants/color_constant.dart';
@@ -12,7 +14,7 @@ class RgbLightScreen extends StatefulWidget {
 class _RgbLightScreenState extends State<RgbLightScreen> {
   bool isOn = true;
   Color currentColor = Colors.red;
-  double brightness = 0.52;
+  double brightness = 0.22;
 
   @override
   Widget build(BuildContext context) {
@@ -24,34 +26,51 @@ class _RgbLightScreenState extends State<RgbLightScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.6,
                 child: Stack(
-                  alignment: Alignment.center,
+                  fit: StackFit.expand,
                   children: [
+                    // Back button
                     Positioned(
-                        top: 70,
-                        left: 20,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Icon(
-                            Icons.arrow_back_ios,
-                            color: AppColors.onBoardIndicatior,
-                          ),
-                        )),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 110.0),
-                        child: Image.asset(
-                          'assets/images/light.png',
-                          width: 350,
+                      top: 70,
+                      left: 20,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Icon(
+                          Icons.arrow_back_ios,
+                          color: AppColors.onBoardIndicatior,
                         ),
                       ),
                     ),
 
-                    // Positioned switch and label
+                    Positioned(
+                      top: 75,
+                      right: 20,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Icon(
+                          CupertinoIcons.info_circle_fill,
+                          color: AppColors.primary,
+                        ),
+                      ),
+                    ),
+
+                    // Light image
+                    Positioned(
+                      top: 50,
+                      right: -30,
+                      child: Image.asset(
+                        'assets/images/light.png',
+                        width: 300,
+                      ),
+                    ),
+
+                    // RGB Light label and switch
                     Positioned(
                       top: 150,
                       left: 25,
@@ -78,76 +97,33 @@ class _RgbLightScreenState extends State<RgbLightScreen> {
                         ],
                       ),
                     ),
+
+                    // Light effect (CustomPainter)
+                    if (isOn)
+                      Expanded(
+                        child: Positioned(
+                          top: 340,
+                          left: 0,
+                          right: -160,
+                          child: Center(
+                            child: CustomPaint(
+                              size: const Size(350, 155),
+                              painter: RPSCustomPainter(
+                                currentColor.withOpacity(brightness),
+                                brightness,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                   ],
                 ),
               ),
-
-              const SizedBox(height: 50),
-
-              // Light visualization
-              if (isOn)
-                Center(
-                  child: Container(
-                    width: 200,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: currentColor.withOpacity(brightness),
-                      boxShadow: [
-                        BoxShadow(
-                          color: currentColor.withOpacity(brightness * 0.5),
-                          blurRadius: 30,
-                          spreadRadius: 10,
-                        ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 80),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const SizedBox(
-                            height: 1,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '${(brightness * 100).round()}%',
-                                style: const TextStyle(
-                                  fontSize: 40,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Text(
-                                'Brightness',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.grey.shade400,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-
               const SizedBox(height: 30),
             ],
           ),
 
-          CustomPaint(
-            size: Size(200, (200 * 0.5833333333333334).toDouble()),
-            painter: RPSCustomPainter(
-              currentColor.withOpacity(brightness),
-            ),
-          ),
-
-          //choose color
+          // Color chooser
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 50.0),
             child: Column(
@@ -180,7 +156,6 @@ class _RgbLightScreenState extends State<RgbLightScreen> {
   }
 }
 
-// Rest of the ColorSlider class remains the same...
 class ColorSlider extends StatefulWidget {
   final Function(Color) onColorChanged;
 
@@ -350,39 +325,74 @@ class _ColorSliderState extends State<ColorSlider> {
 }
 
 class RPSCustomPainter extends CustomPainter {
-  final Color color; // Add a color field
+  final Color color;
+  final double brightness;
 
-  RPSCustomPainter(this.color); // Constructor to accept color
+  RPSCustomPainter(this.color, this.brightness);
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Layer 1
-    Paint paintFill0 = Paint()
-      ..color = color // Use the passed color
+    final Paint paintFill = Paint()
+      ..color = color
       ..style = PaintingStyle.fill
-      ..strokeWidth = size.width * 0.00
-      ..strokeCap = StrokeCap.butt
-      ..strokeJoin = StrokeJoin.miter;
+      ..maskFilter = MaskFilter.blur(BlurStyle.normal, 20 * brightness);
 
-    Path path0 = Path();
-    path0.moveTo(size.width * 0.2933333, size.height * 0.2885714);
-    path0.lineTo(size.width * 0.5425000, size.height * 0.2857143);
-    path0.lineTo(size.width * 0.6508333, size.height * 0.7157143);
-    path0.lineTo(size.width * 0.2100000, size.height * 0.7157143);
-    path0.lineTo(size.width * 0.1775000, size.height * 0.7142857);
-    path0.lineTo(size.width * 0.2933333, size.height * 0.2885714);
-    path0.close();
+    Path path = Path();
 
-    canvas.drawPath(path0, paintFill0);
+    // Starting point at the left edge of the arc
+    path.moveTo(size.width * 0.3, size.height * 0.2);
 
-    // Layer 1 Stroke (You can modify or remove this part if not needed)
-    Paint paintStroke0 = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = size.width * 0.00
-      ..strokeCap = StrokeCap.butt
-      ..strokeJoin = StrokeJoin.miter;
+    path.addArc(
+      Rect.fromCircle(
+        center: Offset(size.width * 0.5, size.height * 0.2),
+        radius: size.width * 0.2,
+      ),
+      pi,
+      pi,
+    );
 
-    canvas.drawPath(path0, paintStroke0);
+    path.lineTo(size.width * 0.8, size.height);
+    path.lineTo(size.width * 0.2, size.height);
+    path.close();
+
+    canvas.drawPath(path, paintFill);
+
+    final Paint glowPaint = Paint()
+      ..color = color.withOpacity(brightness * 0.1)
+      ..style = PaintingStyle.fill
+      ..maskFilter = MaskFilter.blur(BlurStyle.normal, 30 * brightness);
+
+    final Path glowPath = Path()
+      ..addOval(
+        Rect.fromCircle(
+          center: Offset(size.width * 0.5, size.height * 0.2),
+          radius: size.width * 0.15,
+        ),
+      );
+
+    canvas.drawPath(glowPath, glowPaint);
+
+    // Brightness text
+    final textPainter = TextPainter(
+      text: TextSpan(
+        text: '${(brightness * 100).round()}%',
+        style: TextStyle(
+          color: Colors.black.withOpacity(0.7),
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      textDirection: TextDirection.ltr,
+    );
+
+    textPainter.layout();
+    textPainter.paint(
+      canvas,
+      Offset(
+        (size.width - textPainter.width) / 2,
+        size.height * 0.4,
+      ),
+    );
   }
 
   @override
