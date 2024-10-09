@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.4"
+  animated_background:
+    dependency: "direct main"
+    description:
+      name: animated_background
+      sha256: "24b05a6dca2cb0231b011f9e8fd2e9d8060faac08a78cf0643915bb7d6e9b03b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   args:
     dependency: transitive
     description:
@@ -336,6 +344,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.2"
+  rainbow_color:
+    dependency: "direct main"
+    description:
+      name: rainbow_color
+      sha256: f207a81ecf6ab9f13f38c8966c8ef81ddadd5e62f0d1d457a4e6c86678f12563
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
+  rainbow_vis:
+    dependency: transitive
+    description:
+      name: rainbow_vis
+      sha256: "4b4873fdfffc5f6d7519215c913478294d44792b9706d212b626e793a9fec171"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   shared_preferences:
     dependency: "direct main"
     description:

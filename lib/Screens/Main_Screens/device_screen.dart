@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gemesh/Constants/color_constant.dart';
+import 'package:gemesh/Screens/Component_Screens/ac_conditioner_screen.dart';
+import 'package:gemesh/Screens/Component_Screens/dimmer_light_screen.dart';
 import 'package:gemesh/Screens/Component_Screens/fan_control_screen.dart';
+import 'package:gemesh/Screens/Component_Screens/light_screen.dart';
 import 'package:gemesh/Screens/Component_Screens/rgb_light_screen.dart';
 import 'package:gemesh/Screens/Component_Screens/speaker_screen.dart';
 import 'package:gemesh/Widgets/room_category_screen.dart';
@@ -139,9 +142,7 @@ class DeviceScreen extends StatelessWidget {
                   ),
                 ],
               ),
-
               const SizedBox(height: 16),
-
               // Appliances Grid
               Expanded(
                 child: GridView.count(
@@ -170,18 +171,34 @@ class DeviceScreen extends StatelessWidget {
                         status: 'Inactive',
                         deviceName: 'SRT3',
                         isOn: false,
-                        onTap: () {}),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const DimmerLightScreen(),
+                            ),
+                          );
+                        }),
                     _buildApplianceCard(
-                        icon: Icons.camera_alt,
-                        title: 'Camera',
+                        icon: Icons.ac_unit,
+                        title: 'AC',
                         subtitle: 'Living Room',
                         status: 'Inactive',
                         deviceName: 'SRT3',
                         isOn: false,
-                        onTap: () {}),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AcConditionerScreen(
+                                tag: 'AC',
+                              ),
+                            ),
+                          );
+                        }),
                     _buildApplianceCard(
                         icon: Icons.light,
-                        title: 'Light',
+                        title: 'RGB Light',
                         subtitle: 'Bedroom',
                         status: 'Inactive',
                         deviceName: 'SRT3',
@@ -195,18 +212,34 @@ class DeviceScreen extends StatelessWidget {
                           );
                         }),
                     _buildApplianceCard(
-                        icon: Icons.speaker,
-                        title: 'Speaker',
+                        icon: Icons.light,
+                        title: 'Light',
                         subtitle: 'Bedroom',
-                        status: 'Active',
-                        deviceName: 'SRT4',
+                        status: 'Inactive',
+                        deviceName: 'SRT3',
                         isOn: true,
                         onTap: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SpeakerScreen()));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LightScreen(),
+                            ),
+                          );
                         }),
+                    _buildApplianceCard(
+                      icon: Icons.speaker,
+                      title: 'Speaker',
+                      subtitle: 'Bedroom',
+                      status: 'Active',
+                      deviceName: 'SRT4',
+                      isOn: true,
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SpeakerScreen()));
+                      },
+                    ),
                   ],
                 ),
               ),
