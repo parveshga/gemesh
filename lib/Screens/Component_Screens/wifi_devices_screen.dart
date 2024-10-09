@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gemesh/Constants/color_constant.dart';
+import 'package:gemesh/Widgets/room_category_screen.dart';
 import 'package:gemesh/Widgets/wifi_device_card_widget.dart';
 
 class WifiDevicesScreen extends StatelessWidget {
@@ -86,24 +87,24 @@ class WifiDevicesScreen extends StatelessWidget {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: const [
-                    _RoomCategory(
+                    RoomCategory(
                       icon: Icons.home,
                       label: 'All',
                       isSelected: true,
                     ),
-                    _RoomCategory(
+                    RoomCategory(
                       icon: Icons.weekend,
                       label: 'Living Room',
                     ),
-                    _RoomCategory(
+                    RoomCategory(
                       icon: Icons.kitchen,
                       label: 'Kitchen',
                     ),
-                    _RoomCategory(
+                    RoomCategory(
                       icon: Icons.bed,
                       label: 'Bed Room',
                     ),
-                    _RoomCategory(
+                    RoomCategory(
                       icon: Icons.balcony,
                       label: 'Balcony',
                     ),
@@ -128,52 +129,6 @@ class WifiDevicesScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _RoomCategory extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final bool isSelected;
-
-  const _RoomCategory({
-    required this.icon,
-    required this.label,
-    this.isSelected = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: AppColors.whiteBackground,
-              border: Border.all(
-                  color: isSelected ? AppColors.primary : Colors.grey.shade200,
-                  width: 5),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              icon,
-              color: AppColors.primary,
-              size: 24,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              color: isSelected ? Colors.blue : Colors.black,
-              fontSize: 12,
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -8,6 +8,7 @@ class DeviceCard extends StatelessWidget {
   final bool isActive;
 
   const DeviceCard({
+    super.key,
     required this.deviceName,
     required this.location,
     required this.isActive,
