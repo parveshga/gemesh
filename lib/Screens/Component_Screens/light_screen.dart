@@ -37,7 +37,6 @@ class _LightScreenState extends State<LightScreen> {
                         left: 20,
                         child: GestureDetector(
                           onTap: () {
-                            print('hadbw');
                             Navigator.pop(context);
                           },
                           child: const Icon(
