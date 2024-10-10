@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gemesh/Constants/color_constant.dart';
 import 'package:gemesh/Screens/Component_Screens/ac_conditioner_screen.dart';
@@ -8,8 +9,22 @@ import 'package:gemesh/Screens/Component_Screens/rgb_light_screen.dart';
 import 'package:gemesh/Screens/Component_Screens/speaker_screen.dart';
 import 'package:gemesh/Widgets/room_category_screen.dart';
 
-class DeviceScreen extends StatelessWidget {
+class DeviceScreen extends StatefulWidget {
   const DeviceScreen({super.key});
+
+  @override
+  State<DeviceScreen> createState() => _DeviceScreenState();
+}
+
+class _DeviceScreenState extends State<DeviceScreen> {
+  final Map<String, bool> _deviceStates = {
+    'Fan': true,
+    'Dimmer Light': false,
+    'AC': false,
+    'RGB Light': true,
+    'Light': true,
+    'Speaker': true,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -154,9 +169,8 @@ class DeviceScreen extends StatelessWidget {
                         icon: Icons.wind_power,
                         title: 'Fan',
                         subtitle: 'Bedroom',
-                        status: 'Active',
                         deviceName: 'SRT',
-                        isOn: true,
+                        isOn: _deviceStates['Fan']!,
                         onTap: () {
                           Navigator.push(
                               context,
@@ -168,9 +182,8 @@ class DeviceScreen extends StatelessWidget {
                         icon: Icons.lightbulb,
                         title: 'Dimmer Light',
                         subtitle: 'Bedroom',
-                        status: 'Inactive',
                         deviceName: 'SRT3',
-                        isOn: false,
+                        isOn: _deviceStates['Dimmer Light']!,
                         onTap: () {
                           Navigator.push(
                             context,
@@ -183,9 +196,8 @@ class DeviceScreen extends StatelessWidget {
                         icon: Icons.ac_unit,
                         title: 'AC',
                         subtitle: 'Living Room',
-                        status: 'Inactive',
                         deviceName: 'SRT3',
-                        isOn: false,
+                        isOn: _deviceStates['AC']!,
                         onTap: () {
                           Navigator.push(
                             context,
@@ -200,9 +212,8 @@ class DeviceScreen extends StatelessWidget {
                         icon: Icons.light,
                         title: 'RGB Light',
                         subtitle: 'Bedroom',
-                        status: 'Inactive',
                         deviceName: 'SRT3',
-                        isOn: true,
+                        isOn: _deviceStates['RGB Light']!,
                         onTap: () {
                           Navigator.push(
                             context,
@@ -215,9 +226,8 @@ class DeviceScreen extends StatelessWidget {
                         icon: Icons.light,
                         title: 'Light',
                         subtitle: 'Bedroom',
-                        status: 'Inactive',
                         deviceName: 'SRT3',
-                        isOn: true,
+                        isOn: _deviceStates['Light']!,
                         onTap: () {
                           Navigator.push(
                             context,
@@ -230,9 +240,8 @@ class DeviceScreen extends StatelessWidget {
                       icon: Icons.speaker,
                       title: 'Speaker',
                       subtitle: 'Bedroom',
-                      status: 'Active',
                       deviceName: 'SRT4',
-                      isOn: true,
+                      isOn: _deviceStates['Speaker']!,
                       onTap: () {
                         Navigator.push(
                             context,
@@ -254,7 +263,6 @@ class DeviceScreen extends StatelessWidget {
     required IconData icon,
     required String title,
     required String subtitle,
-    required String status,
     required String deviceName,
     required bool isOn,
     required VoidCallback onTap,
@@ -293,9 +301,13 @@ class DeviceScreen extends StatelessWidget {
                   icon,
                   color: isOn ? Colors.blue[900] : Colors.grey[600],
                 ),
-                Switch(
+                CupertinoSwitch(
                   value: isOn,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    setState(() {
+                      _deviceStates[title] = value;
+                    });
+                  },
                   activeColor: Colors.blue[900],
                 ),
               ],
@@ -317,23 +329,27 @@ class DeviceScreen extends StatelessWidget {
                     Text(
                       deviceName,
                       style: TextStyle(
-                        color: Colors.grey[600],
+                        fontSize: 10,
+                        color: isOn ? Colors.blue[900] : Colors.grey[600],
                       ),
-                    )
+                    ),
                   ],
                 ),
+                const SizedBox(height: 4),
                 Text(
                   subtitle,
                   style: TextStyle(
-                    color: Colors.grey[600],
                     fontSize: 12,
+                    color: isOn ? Colors.blue[900] : Colors.grey[600],
                   ),
                 ),
+                const SizedBox(height: 2),
                 Text(
-                  status,
+                  isOn ? 'Active' : 'Inactive',
                   style: TextStyle(
-                    color: isOn ? Colors.green : Colors.red,
                     fontSize: 10,
+                    color: isOn ? Colors.green : Colors.redAccent,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],

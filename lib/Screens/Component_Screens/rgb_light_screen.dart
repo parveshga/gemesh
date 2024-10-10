@@ -62,11 +62,11 @@ class _RgbLightScreenState extends State<RgbLightScreen> {
 
                     // Light image
                     Positioned(
-                      top: 50,
-                      right: -30,
+                      top: 15,
+                      right: -82,
                       child: Image.asset(
                         'assets/images/light.png',
-                        width: 300,
+                        width: 400,
                       ),
                     ),
 

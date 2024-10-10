@@ -35,28 +35,27 @@ class _LightScreenState extends State<LightScreen> {
                       Positioned(
                         top: 70,
                         left: 20,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Icon(
+                        child: IconButton(
+                          icon: const Icon(
                             Icons.arrow_back_ios,
                             color: AppColors.onBoardIndicatior,
                           ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
                         ),
                       ),
 
+                      // Info button
                       Positioned(
                         top: 75,
                         right: 20,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Icon(
+                        child: IconButton(
+                          icon: const Icon(
                             CupertinoIcons.info_circle_fill,
                             color: AppColors.primary,
                           ),
+                          onPressed: () {},
                         ),
                       ),
 
