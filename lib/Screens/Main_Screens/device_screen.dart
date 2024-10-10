@@ -5,6 +5,7 @@ import 'package:gemesh/Screens/Component_Screens/ac_conditioner_screen.dart';
 import 'package:gemesh/Screens/Component_Screens/dimmer_light_screen.dart';
 import 'package:gemesh/Screens/Component_Screens/fan_control_screen.dart';
 import 'package:gemesh/Screens/Component_Screens/light_screen.dart';
+import 'package:gemesh/Screens/Component_Screens/location_viewall_screen.dart';
 import 'package:gemesh/Screens/Component_Screens/rgb_light_screen.dart';
 import 'package:gemesh/Screens/Component_Screens/speaker_screen.dart';
 import 'package:gemesh/Widgets/room_category_screen.dart';
@@ -92,7 +93,14 @@ class _DeviceScreenState extends State<DeviceScreen> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LocationListScreen(),
+                        ),
+                      );
+                    },
                     child: const Text(
                       'View All',
                       style: TextStyle(
