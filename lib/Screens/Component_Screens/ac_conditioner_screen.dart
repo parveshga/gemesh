@@ -10,9 +10,9 @@ import 'package:rainbow_color/rainbow_color.dart';
 class AcConditionerScreen extends StatefulWidget {
   final String tag;
 
-  const AcConditionerScreen({Key? key, required this.tag}) : super(key: key);
+  const AcConditionerScreen({super.key, required this.tag});
   @override
-  _AcConditionerScreenState createState() => _AcConditionerScreenState();
+  State<AcConditionerScreen> createState() => _AcConditionerScreenState();
 }
 
 class _AcConditionerScreenState extends State<AcConditionerScreen>
@@ -30,16 +30,6 @@ class _AcConditionerScreenState extends State<AcConditionerScreen>
     const Color.fromARGB(255, 255, 89, 0),
     const Color(0xFFE4262F)
   ], rangeStart: 0.0, rangeEnd: 1.0);
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

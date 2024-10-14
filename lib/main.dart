@@ -24,8 +24,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => GoogleSignInService(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => GoogleSignInService(),
+        ),
+      ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: true,
         home: SplashScreen(),
